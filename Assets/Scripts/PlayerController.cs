@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour {
     public bool grounded;
     public float jumpPower = 9.35f;
 
+    public GameObject GameOverScreen;
+
     private Rigidbody2D playerRigidBody;
     private Animator animations;
     private SpriteRenderer sprite;
     private bool jump;
+
 
 	// Use this for initialization
 	void Start () {
@@ -74,5 +77,17 @@ public class PlayerController : MonoBehaviour {
             Destroy(collision.gameObject);
         }
 
+    }
+
+    // cuando el personaje abandona la escena
+    private void OnBecameInvisible()
+    {
+        EndGame();
+    }
+
+    // acaba el juego
+    private void EndGame()
+    {
+        GameOverScreen.SetActive(true);
     }
 }
