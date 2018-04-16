@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
         animations.SetBool("Grounded", grounded);
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && grounded) {
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded) {
             jump = true;
         }
 
