@@ -28,9 +28,11 @@ public class PlayerController : MonoBehaviour {
         animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
         animations.SetBool("Grounded", grounded);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && grounded) {
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && grounded) {
             jump = true;
         }
+
+        
 
     }
 
@@ -64,5 +66,12 @@ public class PlayerController : MonoBehaviour {
 
 
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Gem") {
+            Destroy(collision.gameObject);
+        }
     }
 }
