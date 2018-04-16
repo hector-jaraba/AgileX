@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float speed = 2f;
-    public float maxSpeed = 5f;
+    public float speed = 75f;
+    public float maxSpeed = 3f;
     public bool grounded;
-    public float jumpPower = 6.5f;
+    public float jumpPower = 9.35f;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
@@ -73,5 +73,6 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "Gem") {
             Destroy(collision.gameObject);
         }
+
     }
 }
