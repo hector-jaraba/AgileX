@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour {
 
         //movement = false;
         Invoke("EnableMovement", 0.7f);
-
         dmgSprite.color = Color.red;
+
     }
 
     void EnableMovement()
