@@ -8,14 +8,16 @@ public class PlayerController : MonoBehaviour {
     public float maxSpeed = 3f;
     public bool grounded;
     public float jumpPower = 9.35f;
+    public float knockPower = 6.5f;
 
     public GameObject GameOverScreen;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
     private SpriteRenderer sprite;
+    private SpriteRenderer dmgSprite;
     private bool jump;
-
+    private bool movement = true;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         playerRigidBody = GetComponent<Rigidbody2D>();
         animations = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        dmgSprite = GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -43,6 +46,10 @@ public class PlayerController : MonoBehaviour {
     {
         // detecto la direccion en el eje horizontal
         float h = Input.GetAxis("Horizontal");
+
+        // el jugador no se puede mover
+        if (!movement) h = 0;
+
 
         //le aplico una fuerza
         playerRigidBody.AddForce(Vector2.right * speed * h);
@@ -83,6 +90,24 @@ public class PlayerController : MonoBehaviour {
     private void OnBecameInvisible()
     {
         EndGame();
+    }
+
+    public void EnemyKnockBack(float enemyPosX)
+    {
+        jump = true;
+        float side = Mathf.Sign(enemyPosX - transform.position.x);
+        playerRigidBody.AddForce(Vector2.left * knockPower * side , ForceMode2D.Impulse);
+
+        //movement = false;
+        Invoke("EnableMovement", 0.7f);
+
+        dmgSprite.color = Color.red;
+    }
+
+    void EnableMovement()
+    {
+        movement = true;
+        dmgSprite.color = Color.white;
     }
 
     // acaba el juego
