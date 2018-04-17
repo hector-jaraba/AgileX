@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public float knockPower = 6.5f;
 
     public GameObject GameOverScreen;
+    public GameObject WinScreen;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
@@ -108,6 +109,11 @@ public class PlayerController : MonoBehaviour {
     {
         movement = true;
         dmgSprite.color = Color.white;
+    }
+
+    private void Win()
+    {
+        WinScreen.SetActive(true);
     }
 
     // acaba el juego
