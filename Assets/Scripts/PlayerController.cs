@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     public Text puntuacion;
     public Text contadorTimer;
     public float tiempo;
+    public Scrollbar healthBar;
+    public float energy = 100;
 
     public GameObject GameOverScreen;
     public GameObject WinScreen;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer dmgSprite;
     private bool jump;
     private bool movement = true;
+    private bool flag = true;
 
 	// Use this for initialization
 	void Start () {
@@ -35,11 +38,30 @@ public class PlayerController : MonoBehaviour {
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
         contadorTimer.text = "" + tiempo;
+        healthBar.size = energy;
+    }
+
+    public void ActualizarHealthBar() {
+        if (energy <= 90 && (int)tiempo % 5 == 0 && flag){
+            energy += 10;
+            flag = false;
+        } else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && energy >= 10)
+            energy -= 10;
+
+        healthBar.size = energy/100f;
+
+        // flag para controlar que solo crezca la energia cada 5 segundos
+        if ((int)tiempo % 5 != 0) flag = true;
+
+        //Si se queda sin energia no se puede mover
+        if (energy == 0) movement = false;
+        else movement = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        ActualizarHealthBar();
         animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
         animations.SetBool("Grounded", grounded);
 
