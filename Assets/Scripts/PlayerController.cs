@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     public Text puntuacion;
     public Text contadorTimer;
     public float tiempo;
-    public Scrollbar healthBar;
+    public Image health;
     public float energy = 100;
 
     public GameObject GameOverScreen;
@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour {
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
         contadorTimer.text = "" + tiempo;
-        healthBar.size = energy;
     }
 
     public void ActualizarHealthBar() {
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour {
         } else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && energy >= 10)
             energy -= 10;
 
-        healthBar.size = energy/100f;
+        health.transform.localScale = new Vector2(energy / 100f, 1);
 
         // flag para controlar que solo crezca la energia cada 5 segundos
         if ((int)tiempo % 5 != 0) flag = true;
