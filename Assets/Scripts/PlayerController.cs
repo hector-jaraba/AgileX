@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour {
     public bool grounded;
     public float jumpPower = 9.35f;
     public float knockPower = 6.5f;
+    public int contadorPuntos;
+    public Text puntuacion;
+    public Text contadorTimer;
+    public float tiempo;
 
     public GameObject GameOverScreen;
     public GameObject WinScreen;
@@ -27,6 +32,9 @@ public class PlayerController : MonoBehaviour {
         animations = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
+        contadorPuntos = 25;
+        puntuacion.text = "Puntos: " + contadorPuntos;
+        contadorTimer.text = "" + tiempo;
     }
 	
 	// Update is called once per frame
@@ -39,8 +47,13 @@ public class PlayerController : MonoBehaviour {
             jump = true;
         }
 
-        
-
+        tiempo -= Time.deltaTime;
+        contadorTimer.text = "" + tiempo.ToString("f0");
+        if (tiempo <= 5)
+            contadorTimer.color = Color.red;
+        if (tiempo <= 0)
+            contadorTimer.text = "0";
+  
     }
 
     void FixedUpdate()
@@ -82,6 +95,8 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Gem") {
+            contadorPuntos = contadorPuntos + 5;
+            puntuacion.text = "Puntos: " + contadorPuntos;
             Destroy(collision.gameObject);
         }
 
