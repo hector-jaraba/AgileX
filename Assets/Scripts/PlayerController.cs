@@ -12,24 +12,27 @@ public class PlayerController : MonoBehaviour {
     public float knockPower = 6.5f;
     public int contadorPuntos;
     public Text puntuacion;
-    public Text contadorTimer;
-    public float tiempo;
+    
+    
     public Image health;
     public float energy = 100;
     public int puntosGanar = 50;
 
-    public GameObject GameOverScreen;
-    public GameObject WinScreen;
-    public GameObject healthBar;
+    GameObject gameOverScreen;
+    GameObject winScreen;
+    GameObject healthBar;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
     private SpriteRenderer sprite;
     private SpriteRenderer dmgSprite;
-    private bool ScreenUI = false;
+    private bool screenUI = false;
     private bool jump;
     private bool movement = true;
     private bool flag = true;
+    private bool disableMovement;
+
+    float tiempo = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -38,9 +41,14 @@ public class PlayerController : MonoBehaviour {
         animations = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
+
+        gameOverScreen = GameObject.Find("GameOver");
+        winScreen = GameObject.Find("WinScreen");
+        healthBar = GameObject.Find("HealthBar");
+
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
-        contadorTimer.text = "" + tiempo;
+        
     }
 
     public void ActualizarHealthBar() {
@@ -63,7 +71,7 @@ public class PlayerController : MonoBehaviour {
         {
             movement = false;
         }
-        else if (energy > 0 && !ScreenUI) movement = true;
+        else if (energy > 0 && !screenUI) movement = true;
     }
 	
 	// Update is called once per frame
@@ -77,46 +85,50 @@ public class PlayerController : MonoBehaviour {
             jump = true;
         }
 
-        tiempo -= Time.deltaTime;
-        contadorTimer.text = "" + tiempo.ToString("f0");
-        if (tiempo <= 5)
-            contadorTimer.color = Color.red;
-        if (tiempo <= 0)
-            contadorTimer.text = "0";
-  
+        if (!movement) disableMovement = true;
+        
+        
     }
 
     void FixedUpdate()
     {
-        // detecto la direccion en el eje horizontal
-        float h = Input.GetAxis("Horizontal");
+        
 
         // el jugador no se puede mover
-        if (!movement) h = 0;
+        if (!disableMovement) {
+
+            // detecto la direccion en el eje horizontal
+            float h = Input.GetAxis("Horizontal");
+
+            //le aplico una fuerza
+            playerRigidBody.AddForce(Vector2.right * speed * h);
 
 
-        //le aplico una fuerza
-        playerRigidBody.AddForce(Vector2.right * speed * h);
+            //con la funcion clamp de la libreria mathf puedo poner un limite a la velocidad
+            float limitedSpeed = Mathf.Clamp(playerRigidBody.velocity.x, -maxSpeed, maxSpeed);
+            playerRigidBody.velocity = new Vector2(limitedSpeed, playerRigidBody.velocity.y);
+
+            if (h > 0.1f)
+            {
+                sprite.flipX = false;
+            }
+
+            if (h < -0.1f)
+            {
+                sprite.flipX = true;
+            }
+
+            if (jump)
+            {
+                playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                jump = false;
+
+            }
 
 
-        //con la funcion clamp de la libreria mathf puedo poner un limite a la velocidad
-        float limitedSpeed = Mathf.Clamp(playerRigidBody.velocity.x, -maxSpeed, maxSpeed);
-        playerRigidBody.velocity = new Vector2(limitedSpeed, playerRigidBody.velocity.y);
-
-        if (h > 0.1f) {
-            sprite.flipX = false;
         }
 
-        if (h < -0.1f)
-        {
-            sprite.flipX = true;
-        }
 
-        if (jump) {
-            playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            jump = false;
-
-        }
 
 
 
@@ -133,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 
         if (collision.tag == "GameOver") {
             EndGame();
-            ScreenUI = true;
+            screenUI = true;
         }
 
     }
@@ -149,6 +161,11 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
+        contadorPuntos -= 5;
+        puntuacion.text = "Puntos: " + contadorPuntos;
+        if (contadorPuntos <= 0) {
+            EndGame();
+        }
 
     }
 
@@ -158,11 +175,15 @@ public class PlayerController : MonoBehaviour {
         dmgSprite.color = Color.white;
     }
 
+    void DisableMovement() {
+        movement = false;
+    }
+
     private void Win()
     {
         movement = false;
-        ScreenUI = true;
-        WinScreen.SetActive(true);
+        screenUI = true;
+        winScreen.SetActive(true);
         healthBar.SetActive(false);
 
 
@@ -171,7 +192,9 @@ public class PlayerController : MonoBehaviour {
     // acaba el juego
     private void EndGame()
     {
-        GameOverScreen.SetActive(true);
+        movement = false;
+        Debug.Log("movimiento" + movement);
+        gameOverScreen.SetActive(true);
         healthBar.SetActive(false);
     }
 }
