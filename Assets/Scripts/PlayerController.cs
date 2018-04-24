@@ -32,7 +32,11 @@ public class PlayerController : MonoBehaviour {
     private bool flag = true;
     private bool disableMovement;
 
-    float tiempo = 50;
+    float timer = 0.0f;
+    float timeMax = 3.0f;
+    float increment = 0.0f;
+
+    int tiempo = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -53,17 +57,35 @@ public class PlayerController : MonoBehaviour {
 
     public void ActualizarHealthBar() {
 
-        if (energy <= 90 && (int)tiempo % 5 == 0 && flag){
-            energy += 10;
+        timer += Time.deltaTime;
+        increment = 0.5f;
+
+        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow)) && energy >= 0){
+            energy -= increment;
             flag = false;
+        } else{
+            if(energy <= 90 && flag){
+
+
+                    energy += 10;
+
+
+
+                
+                flag = false;
+            }
+
+        }
             
-        } else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && energy >= 10)
-            energy -= 10;
 
         health.transform.localScale = new Vector2(energy / 100f, 1);
 
         // flag para controlar que solo crezca la energia cada 5 segundos
-        if ((int)tiempo % 2 != 0) flag = true;
+        if (timer >= timeMax){
+            flag = true;
+            timer = 0.0f;
+            
+        } 
 
 
         // Si se queda sin energia o aparece alguna pantalla UI no se puede mover 
@@ -71,13 +93,15 @@ public class PlayerController : MonoBehaviour {
         {
             movement = false;
         }
-        else if (energy > 0 && !screenUI) movement = true;
+        else if (energy > 0 && !screenUI){
+            movement = true;
+        } 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        ActualizarHealthBar();
+
         animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
         animations.SetBool("Grounded", grounded);
 
@@ -92,10 +116,10 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        
+        ActualizarHealthBar();
 
         // el jugador no se puede mover
-        if (!disableMovement) {
+        if (movement) {
 
             // detecto la direccion en el eje horizontal
             float h = Input.GetAxis("Horizontal");
@@ -137,7 +161,7 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Gem") {
-            contadorPuntos = contadorPuntos + 5;
+            contadorPuntos = contadorPuntos + collision.GetComponent<Gem>().points;
             puntuacion.text = "Puntos: " + contadorPuntos;
             if (contadorPuntos >= puntosGanar) Win();
             Destroy(collision.gameObject);
