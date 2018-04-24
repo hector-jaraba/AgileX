@@ -16,14 +16,17 @@ public class PlayerController : MonoBehaviour {
     public float tiempo;
     public Image health;
     public float energy = 100;
+    public int puntosGanar = 50;
 
     public GameObject GameOverScreen;
     public GameObject WinScreen;
+    public GameObject healthBar;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
     private SpriteRenderer sprite;
     private SpriteRenderer dmgSprite;
+    private bool ScreenUI = false;
     private bool jump;
     private bool movement = true;
     private bool flag = true;
@@ -41,20 +44,26 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void ActualizarHealthBar() {
+
         if (energy <= 90 && (int)tiempo % 5 == 0 && flag){
             energy += 10;
             flag = false;
-        } else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && energy >= 10)
+            
+        } else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow)) && energy >= 10)
             energy -= 10;
 
         health.transform.localScale = new Vector2(energy / 100f, 1);
 
         // flag para controlar que solo crezca la energia cada 5 segundos
-        if ((int)tiempo % 5 != 0) flag = true;
+        if ((int)tiempo % 2 != 0) flag = true;
 
-        //Si se queda sin energia no se puede mover
-        if (energy == 0) movement = false;
-        else movement = true;
+
+        // Si se queda sin energia o aparece alguna pantalla UI no se puede mover 
+        if (energy == 0)
+        {
+            movement = false;
+        }
+        else if (energy > 0 && !ScreenUI) movement = true;
     }
 	
 	// Update is called once per frame
@@ -118,6 +127,7 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "Gem") {
             contadorPuntos = contadorPuntos + 5;
             puntuacion.text = "Puntos: " + contadorPuntos;
+            if (contadorPuntos >= puntosGanar) Win();
             Destroy(collision.gameObject);
         }
 
@@ -127,6 +137,7 @@ public class PlayerController : MonoBehaviour {
     private void OnBecameInvisible()
     {
         EndGame();
+        ScreenUI = true;
     }
 
     public void EnemyKnockBack(float enemyPosX)
@@ -143,18 +154,24 @@ public class PlayerController : MonoBehaviour {
 
     void EnableMovement()
     {
-        movement = true;
+        //movement = true;
         dmgSprite.color = Color.white;
     }
 
     private void Win()
     {
+        movement = false;
+        ScreenUI = true;
         WinScreen.SetActive(true);
+        healthBar.SetActive(false);
+
+
     }
 
     // acaba el juego
     private void EndGame()
     {
         GameOverScreen.SetActive(true);
+        healthBar.SetActive(false);
     }
 }
