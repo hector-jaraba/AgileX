@@ -125,9 +125,13 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Gem") {
+<<<<<<< Updated upstream
             contadorPuntos = contadorPuntos + 5;
             puntuacion.text = "Puntos: " + contadorPuntos;
             if (contadorPuntos >= puntosGanar) Win();
+=======
+            int puntos = collision.GetComponent<Gem>().Puntos();
+>>>>>>> Stashed changes
             Destroy(collision.gameObject);
         }
 

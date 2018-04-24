@@ -887,6 +887,7 @@ Prefab:
       propertyPath: GameOverScreen
       value: 
       objectReference: {fileID: 1892577570}
+<<<<<<< Updated upstream
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
       propertyPath: WinScreen
@@ -927,6 +928,13 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 262556745}
+=======
+    - target: {fileID: 212168056259629244, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
   m_IsPrefabParent: 0
@@ -1478,8 +1486,60 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1150291609}
 --- !u!1 &1204646398
+=======
+  m_GameObject: {fileID: 1289623847}
+--- !u!1001 &1294832848
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1443493297}
+    m_Modifications:
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.2880425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.45198512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -14.9609375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232207658818090, guid: c41a8490779cdf549ac8a3e019229d73,
+        type: 2}
+      propertyPath: puntuacion
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1343225435
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
