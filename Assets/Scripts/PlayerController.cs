@@ -131,14 +131,14 @@ public class PlayerController : MonoBehaviour {
             Destroy(collision.gameObject);
         }
 
+        if (collision.tag == "GameOver") {
+            EndGame();
+            ScreenUI = true;
+        }
+
     }
 
-    // cuando el personaje abandona la escena
-    private void OnBecameInvisible()
-    {
-        EndGame();
-        ScreenUI = true;
-    }
+   
 
     public void EnemyKnockBack(float enemyPosX)
     {
