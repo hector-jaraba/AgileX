@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour {
     public float energy = 100;
     public int puntosGanar = 50;
 
-    GameObject gameOverScreen;
-    GameObject winScreen;
-    GameObject healthBar;
+    public GameObject gameOverScreen;
+    public GameObject winScreen;
+    public GameObject healthBar;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
@@ -38,6 +38,13 @@ public class PlayerController : MonoBehaviour {
 
     int tiempo = 50;
 
+	private void Awake()
+	{
+        gameOverScreen = GameObject.Find("GameOver");
+        winScreen = GameObject.Find("WinScreen");
+        healthBar = GameObject.Find("HealthBar");
+	}
+
 	// Use this for initialization
 	void Start () {
         //buscamos los componentes internos
@@ -46,9 +53,7 @@ public class PlayerController : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
 
-        gameOverScreen = GameObject.Find("GameOver");
-        winScreen = GameObject.Find("WinScreen");
-        healthBar = GameObject.Find("HealthBar");
+
 
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
@@ -117,6 +122,9 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         ActualizarHealthBar();
+        if (contadorPuntos >= puntosGanar){
+            Win();
+        } 
 
         // el jugador no se puede mover
         if (movement) {
@@ -163,7 +171,6 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "Gem") {
             contadorPuntos = contadorPuntos + collision.GetComponent<Gem>().points;
             puntuacion.text = "Puntos: " + contadorPuntos;
-            if (contadorPuntos >= puntosGanar) Win();
             Destroy(collision.gameObject);
         }
 
@@ -217,6 +224,7 @@ public class PlayerController : MonoBehaviour {
     private void EndGame()
     {
         movement = false;
+        screenUI = true;
         Debug.Log("movimiento" + movement);
         gameOverScreen.SetActive(true);
         healthBar.SetActive(false);
