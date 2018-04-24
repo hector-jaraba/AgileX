@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     private bool disableMovement;
 
     float timer = 0.0f;
-    float timeMax = 3.0f;
+    float timeMax = 0.05f;
     float increment = 0.0f;
 
     int tiempo = 50;
@@ -53,8 +53,6 @@ public class PlayerController : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
 
-
-
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
         
@@ -69,19 +67,11 @@ public class PlayerController : MonoBehaviour {
             energy -= increment;
             flag = false;
         } else{
-            if(energy <= 90 && flag){
-
-
-                    energy += 10;
-
-
-
-                
+            if(energy < 100 && flag){
+                    energy += 0.3f;                
                 flag = false;
             }
-
-        }
-            
+        }            
 
         health.transform.localScale = new Vector2(energy / 100f, 1);
 
@@ -94,11 +84,11 @@ public class PlayerController : MonoBehaviour {
 
 
         // Si se queda sin energia o aparece alguna pantalla UI no se puede mover 
-        if (energy == 0)
+        if (energy <= 0)
         {
             movement = false;
         }
-        else if (energy > 0 && !screenUI){
+        else if (energy > 5 && !screenUI){
             movement = true;
         } 
     }
@@ -159,11 +149,6 @@ public class PlayerController : MonoBehaviour {
 
 
         }
-
-
-
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
