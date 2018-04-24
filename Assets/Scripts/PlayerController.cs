@@ -164,6 +164,9 @@ public class PlayerController : MonoBehaviour {
             contadorPuntos = contadorPuntos + collision.GetComponent<Gem>().points;
             puntuacion.text = "Puntos: " + contadorPuntos;
             if (contadorPuntos >= puntosGanar) Win();
+=======
+            int puntos = collision.GetComponent<Gem>().Puntos();
+>>>>>>> Stashed changes
             Destroy(collision.gameObject);
         }
 

@@ -3021,11 +3021,19 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
       propertyPath: m_LocalPosition.x
+<<<<<<< Updated upstream
       value: 8.533172
       objectReference: {fileID: 0}
     - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
       propertyPath: m_LocalPosition.y
       value: -4.5003552
+=======
+      value: 3.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.84
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 4846731555576530, guid: c41a8490779cdf549ac8a3e019229d73, type: 2}
       propertyPath: m_LocalPosition.z
