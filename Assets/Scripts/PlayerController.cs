@@ -158,11 +158,13 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         if (collision.tag == "Gem") {
             contadorPuntos = contadorPuntos + collision.GetComponent<Gem>().points;
             puntuacion.text = "Puntos: " + contadorPuntos;
             Destroy(collision.gameObject);
         }
+        */
 
         if (collision.tag == "GameOver") {
             EndGame();
@@ -175,8 +177,9 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Gem"))
         {
-            contadorPuntos = contadorPuntos + collision.gameObject.GetComponents<Gem>().points;
+            contadorPuntos = contadorPuntos + collision.gameObject.GetComponent<Gem>().points;
             puntuacion.text = "Puntos: " + contadorPuntos;
+            new WaitForSeconds(0.4f);
         }
 
     }
