@@ -182,9 +182,15 @@ public class PlayerController : MonoBehaviour {
             new WaitForSeconds(0.4f);
         }
 
+        if (collision.gameObject.CompareTag("botiquin"))
+        {
+            if (damage <= 80) damage += 20;
+            new WaitForSeconds(0.4f);
+        }
+
     }
 
-        public void EnemyKnockBack(float enemyPosX)
+    public void EnemyKnockBack(float enemyPosX)
     {
         jump = true;
         float side = Mathf.Sign(enemyPosX - transform.position.x);

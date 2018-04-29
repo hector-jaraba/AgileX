@@ -12,7 +12,6 @@ public class Gem : MonoBehaviour {
     public float GemPositionY = 10.0f;
     public float maxGemPositionX = 8.0f;
     public float minGemPositionX = -8.0f;
-    public Text puntuacion;
 
 
     private float fallDelay = 1f;
