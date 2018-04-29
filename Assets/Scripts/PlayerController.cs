@@ -171,9 +171,17 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-   
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Gem"))
+        {
+            contadorPuntos = contadorPuntos + collision.gameObject.GetComponents<Gem>().points;
+            puntuacion.text = "Puntos: " + contadorPuntos;
+        }
 
-    public void EnemyKnockBack(float enemyPosX)
+    }
+
+        public void EnemyKnockBack(float enemyPosX)
     {
         jump = true;
         float side = Mathf.Sign(enemyPosX - transform.position.x);
