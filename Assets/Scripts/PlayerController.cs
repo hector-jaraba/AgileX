@@ -15,12 +15,15 @@ public class PlayerController : MonoBehaviour {
     
     
     public Image health;
+    public Image life;
     public float energy = 100;
+    public float damage = 100;
     public int puntosGanar = 50;
 
     public GameObject gameOverScreen;
     public GameObject winScreen;
     public GameObject healthBar;
+    public GameObject lifeBar;
 
     private Rigidbody2D playerRigidBody;
     private Animator animations;
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour {
         gameOverScreen = GameObject.Find("GameOver");
         winScreen = GameObject.Find("WinScreen");
         healthBar = GameObject.Find("HealthBar");
+        lifeBar = GameObject.Find("LifeBar");
 	}
 
 	// Use this for initialization
@@ -58,7 +62,7 @@ public class PlayerController : MonoBehaviour {
         
     }
 
-    public void ActualizarHealthBar() {
+    public void ActualizarHealthLifeBar() {
 
         timer += Time.deltaTime;
         increment = 0.5f;
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour {
         }            
 
         health.transform.localScale = new Vector2(energy / 100f, 1);
+        life.transform.localScale = new Vector2(damage / 100f, 1);
 
         // flag para controlar que solo crezca la energia cada 5 segundos
         if (timer >= timeMax){
@@ -111,7 +116,7 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        ActualizarHealthBar();
+        ActualizarHealthLifeBar();
         if (contadorPuntos >= puntosGanar){
             Win();
         } 
@@ -177,9 +182,10 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
+        damage -= 10;
         contadorPuntos -= 5;
         puntuacion.text = "Puntos: " + contadorPuntos;
-        if (contadorPuntos <= 0) {
+        if (contadorPuntos <= 0 || damage <= 0) {
             EndGame();
         }
 
