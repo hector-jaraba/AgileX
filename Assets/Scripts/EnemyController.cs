@@ -30,4 +30,13 @@ public class EnemyController : MonoBehaviour {
         else if (speedEnemy > 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.SendMessage("EnemyKnockBack", transform.position.x);
+            Debug.Log("A chocado contra la un enemigo");
+        }
+    }
 }
