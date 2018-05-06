@@ -184,7 +184,8 @@ public class PlayerController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("botiquin"))
         {
-            if (damage <= 80) damage += 20;
+            damage += 20;
+            if (damage > 100) damage=100;
             new WaitForSeconds(0.4f);
         }
 
