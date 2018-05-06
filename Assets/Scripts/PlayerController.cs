@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (!movement) disableMovement = true;
-        
-        
+
+        Attack();
     }
 
     void FixedUpdate()
@@ -205,6 +205,18 @@ public class PlayerController : MonoBehaviour {
         puntuacion.text = "Puntos: " + contadorPuntos;
         if (contadorPuntos <= 0 || damage <= 0) {
             EndGame();
+        }
+
+    }
+
+
+    void Attack()
+    {
+        AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
+        bool isAttacking = stateInfo.IsName("Player_attack");
+        if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
+        {
+            animations.SetTrigger("Attack");
         }
 
     }
