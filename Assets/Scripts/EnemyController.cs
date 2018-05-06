@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         enemyRigidBody.AddForce(Vector2.right * speedEnemy);
         float limitedSpeed = Mathf.Clamp(enemyRigidBody.velocity.x, -maxSpeedEnemy, maxSpeedEnemy);
         enemyRigidBody.velocity = new Vector2(limitedSpeed, enemyRigidBody.velocity.y);
