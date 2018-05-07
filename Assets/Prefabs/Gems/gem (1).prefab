@@ -121,9 +121,8 @@ MonoBehaviour:
   primeraAparicion: 0.4
   respawnDelay: 6
   GemPositionY: 10
-  maxGemPositionX: 8
+  maxGemPositionX: 25.8
   minGemPositionX: -8
-  puntuacion: {fileID: 0}
 --- !u!212 &212450835864292520
 SpriteRenderer:
   m_ObjectHideFlags: 1
