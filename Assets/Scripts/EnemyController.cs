@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour {
     public int life = 3;
     public float maxSpeedEnemy = 1f;
     private Rigidbody2D enemyRigidBody;
+    bool attacking = false;
+    bool jump = false;
 
     // Use this for initialization
     void Start () {
@@ -19,6 +21,7 @@ public class EnemyController : MonoBehaviour {
         if (life <=0) {
             Destroy(this.gameObject);
         }  
+
     }
 
     // Update is called once per frame
@@ -37,7 +40,14 @@ public class EnemyController : MonoBehaviour {
             transform.localScale = new Vector3(1f, 1f, 1f);
         else if (speedEnemy > 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        if(jump){
+            enemyRigidBody.AddForce(Vector2.up * 25 * 2, ForceMode2D.Impulse);
+            jump = false;
+        }
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,8 +57,23 @@ public class EnemyController : MonoBehaviour {
             Debug.Log("A chocado contra la un enemigo");
         }
 
-        if (collision.tag == "Attack") {
+        if (collision.tag == "Attack" && !attacking) {
             life -= 1;
+            jump = true;
+            attacking = true;
+            Debug.Log(life);
         }
     }
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+        if(collision.tag == "Attack"){
+            attacking = false;
+            
+        }
+	}
+
+
+
+
 }

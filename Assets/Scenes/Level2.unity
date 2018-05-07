@@ -3634,6 +3634,11 @@ Prefab:
       propertyPath: m_TagString
       value: Attack
       objectReference: {fileID: 0}
+    - target: {fileID: 58304991910903366, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
   m_IsPrefabParent: 0
@@ -7541,6 +7546,11 @@ Prefab:
     - target: {fileID: 1575433452919488, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}
       propertyPath: m_Name
       value: BasicEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114313453491761980, guid: 7da1fef5dcf06cd439f8ba46d6154233,
+        type: 2}
+      propertyPath: maxSpeedEnemy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}

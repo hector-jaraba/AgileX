@@ -188,13 +188,6 @@ public class PlayerController : MonoBehaviour {
             new WaitForSeconds(0.4f);
         }
 
-        if (collision.gameObject.CompareTag("botiquin"))
-        {
-            damage += 20;
-            if (damage > 100) damage=100;
-            new WaitForSeconds(0.4f);
-        }
-
     }
 
     public void EnemyKnockBack(float enemyPosX)
