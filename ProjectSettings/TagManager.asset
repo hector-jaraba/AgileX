@@ -9,6 +9,7 @@ TagManager:
   - Amenaza
   - GameOver
   - botiquin
+  - Attack
   layers:
   - Default
   - TransparentFX

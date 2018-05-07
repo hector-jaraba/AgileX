@@ -3592,44 +3592,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
-      propertyPath: GameOverScreen
-      value: 
-      objectReference: {fileID: 1892577570}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: WinScreen
-      value: 
-      objectReference: {fileID: 472321480}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
       propertyPath: puntuacion
       value: 
       objectReference: {fileID: 1262173561}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: contadorTimer
-      value: 
-      objectReference: {fileID: 1017730714}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: finDeTiempo
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: tiempo
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: contadorPuntos
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1147875333}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
       propertyPath: health
@@ -3637,9 +3602,9 @@ Prefab:
       objectReference: {fileID: 262556745}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
-      propertyPath: winScreen
+      propertyPath: life
       value: 
-      objectReference: {fileID: 472321480}
+      objectReference: {fileID: 1331884989}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
       propertyPath: gameOverScreen
@@ -3647,18 +3612,27 @@ Prefab:
       objectReference: {fileID: 1892577570}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
-      propertyPath: life
+      propertyPath: winScreen
       value: 
-      objectReference: {fileID: 1331884989}
+      objectReference: {fileID: 472321480}
+    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1147875333}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
       propertyPath: lifeBar
       value: 
       objectReference: {fileID: 2045567170}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
+    - target: {fileID: 58304991910903366, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
-      propertyPath: energy
-      value: 100
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571744146540450, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
+      propertyPath: m_TagString
+      value: Attack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
