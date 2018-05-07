@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public float speedEnemy = 1f;
+    public int life = 3;
     public float maxSpeedEnemy = 1f;
     private Rigidbody2D enemyRigidBody;
 
@@ -12,9 +13,16 @@ public class EnemyController : MonoBehaviour {
     void Start () {
         enemyRigidBody = GetComponent<Rigidbody2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    void Update()
+    {
+        if (life <=0) {
+            Destroy(this.gameObject);
+        }  
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
         enemyRigidBody.AddForce(Vector2.right * speedEnemy);
         float limitedSpeed = Mathf.Clamp(enemyRigidBody.velocity.x, -maxSpeedEnemy, maxSpeedEnemy);
         enemyRigidBody.velocity = new Vector2(limitedSpeed, enemyRigidBody.velocity.y);
@@ -33,10 +41,14 @@ public class EnemyController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.tag == "Player")
         {
             collision.SendMessage("EnemyKnockBack", transform.position.x);
             Debug.Log("A chocado contra la un enemigo");
+        }
+
+        if (collision.tag == "Attack") {
+            life -= 1;
         }
     }
 }

@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject healthBar;
     public GameObject lifeBar;
 
+    private CircleCollider2D attackCollider;
     private Rigidbody2D playerRigidBody;
     private Animator animations;
     private SpriteRenderer sprite;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour {
         animations = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
+        attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
 
         contadorPuntos = 25;
         puntuacion.text = "Puntos: " + contadorPuntos;
@@ -111,6 +113,8 @@ public class PlayerController : MonoBehaviour {
 
         if (!movement) disableMovement = true;
 
+
+
         Attack();
     }
 
@@ -138,11 +142,13 @@ public class PlayerController : MonoBehaviour {
             if (h > 0.1f)
             {
                 sprite.flipX = false;
+                
             }
 
             if (h < -0.1f)
             {
                 sprite.flipX = true;
+                
             }
 
             if (jump)
@@ -212,11 +218,36 @@ public class PlayerController : MonoBehaviour {
 
     void Attack()
     {
+        AttackColliderUpdate();
         AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
         bool isAttacking = stateInfo.IsName("Player_attack");
         if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
         {
             animations.SetTrigger("Attack");
+        }
+
+        if (isAttacking) {
+            float playbackTime = stateInfo.normalizedTime;
+            if (playbackTime > 0.33 && playbackTime < 0.66)
+            {
+                attackCollider.enabled = true;
+            }
+            else {
+                attackCollider.enabled = false;
+            }
+
+        }
+
+    }
+
+    void AttackColliderUpdate() {
+
+        if (sprite.flipX)
+        {
+            attackCollider.offset = new Vector2(-0.6f, 0);
+        }
+        else {
+            attackCollider.offset = new Vector2(0.6f, 0);
         }
 
     }
