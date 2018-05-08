@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011997526189250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.23, y: -2.08, z: 0}
+  m_LocalPosition: {x: -7.77, y: -2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4511684257270024}
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020433595959052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.056, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0.056, y: 0.362, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4674972116449084}
@@ -152,9 +152,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.004245639, y: 0.0112092495}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.38636053
 --- !u!61 &61646428061992670
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05861616, y: 0.52834666}
+  m_Offset: {x: 0.05861616, y: 0.5423583}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -178,7 +178,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.56512165, y: 0.8296658}
+  m_Size: {x: 0.56512165, y: 0.80164266}
   m_EdgeRadius: 0
 --- !u!95 &95726468866821240
 Animator:
@@ -219,7 +219,7 @@ MonoBehaviour:
   life: {fileID: 0}
   energy: 100
   damage: 100
-  puntosGanar: 50
+  puntosGanar: 125
   gameOverScreen: {fileID: 0}
   winScreen: {fileID: 0}
   healthBar: {fileID: 0}
