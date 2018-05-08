@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
     public void ActualizarHealthLifeBar() {
 
         timer += Time.deltaTime;
-        increment = 0.5f;
+        increment = 0.2f;
 
         if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow)) && energy >= 0){
             energy -= increment;
