@@ -7218,7 +7218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   follow: {fileID: 1752794483}
   minCamPosition: {x: -1.2, y: 0}
-  maxCamPosition: {x: 30, y: 0}
+  maxCamPosition: {x: 31.3, y: 0}
   smoothTime: 0.15
 --- !u!1 &1137635986
 GameObject:
@@ -7304,7 +7304,7 @@ GameObject:
   - component: {fileID: 1147875337}
   - component: {fileID: 1147875336}
   m_Layer: 0
-  m_Name: HealthBar
+  m_Name: EnergyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

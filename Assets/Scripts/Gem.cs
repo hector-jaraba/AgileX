@@ -12,49 +12,47 @@ public class Gem : MonoBehaviour {
     public float GemPositionY = 10.0f;
     public float maxGemPositionX = 8.0f;
     public float minGemPositionX = -8.0f;
+    public int puntos = 10;
 
 
     private float fallDelay = 1f;
-    private Rigidbody2D rb2d; //forces interact
+    private Rigidbody2D rb2d;
     private BoxCollider2D pc2d;
     private Vector3 startPosition;
     private Vector3 startScale;
     private Quaternion startRotation;
+    private Text puntuacion;
 
-	// Use this for initialization
-	void Start () {
+    private ContadorPuntosImplement contadorPuntos;
+    
+    private void Awake()
+    {
+       contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+    }
+
+    void Start () {
         rb2d = GetComponent<Rigidbody2D>();
         pc2d = GetComponent<BoxCollider2D>();
         startPosition = transform.position;
         startRotation = transform.rotation;
         startScale = transform.localScale;
-
         InvokeRepeating("Respawn", primeraAparicion, respawnDelay);
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
-            //puntuacion.text = "Puntos: " + "50";
+            contadorPuntos.SumarPuntos(puntos);
             Invoke("Fall", fallDelay);
             Invoke("Respawn", 0.2f);
             transform.localScale = new Vector3(0.5f, 0.5f);
-            //pc2d.isTrigger = true;
         }
     }
 
     void Fall()
     {
         rb2d.isKinematic = false;
-        //PolygonCollider2D
     }
 
     void Respawn()

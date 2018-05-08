@@ -9,10 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float maxSpeed = 3f;
     public bool grounded;
     public float jumpPower = 9.35f;
-    public float knockPower = 6.5f;
-    public int contadorPuntos;
-    public Text puntuacion;
-    
+    public float knockPower = 6.5f;    
     
     public Image health;
     public Image life;
@@ -42,13 +39,16 @@ public class PlayerController : MonoBehaviour {
 
     int tiempo = 50;
 
-	private void Awake()
+    private ContadorPuntosImplement contadorPuntos;
+
+    private void Awake()
 	{
         gameOverScreen = GameObject.Find("GameOver");
         winScreen = GameObject.Find("WinScreen");
         healthBar = GameObject.Find("HealthBar");
         lifeBar = GameObject.Find("LifeBar");
-	}
+        contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -59,8 +59,6 @@ public class PlayerController : MonoBehaviour {
         dmgSprite = GetComponent<SpriteRenderer>();
         attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
 
-        contadorPuntos = 25;
-        puntuacion.text = "Puntos: " + contadorPuntos;
         
     }
 
@@ -121,7 +119,7 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         ActualizarHealthLifeBar();
-        if (contadorPuntos >= puntosGanar){
+        if (contadorPuntos.getPuntos() >= puntosGanar){
             Win();
         } 
 
@@ -164,28 +162,10 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*
-        if (collision.tag == "Gem") {
-            contadorPuntos = contadorPuntos + collision.GetComponent<Gem>().points;
-            puntuacion.text = "Puntos: " + contadorPuntos;
-            Destroy(collision.gameObject);
-        }
-        */
 
         if (collision.tag == "GameOver") {
             EndGame();
             screenUI = true;
-        }
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Gem"))
-        {
-            contadorPuntos = contadorPuntos + collision.gameObject.GetComponent<Gem>().points;
-            puntuacion.text = "Puntos: " + contadorPuntos;
-            new WaitForSeconds(0.4f);
         }
 
     }
@@ -200,9 +180,8 @@ public class PlayerController : MonoBehaviour {
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
         damage -= 10;
-        contadorPuntos -= 5;
-        puntuacion.text = "Puntos: " + contadorPuntos;
-        if (contadorPuntos <= 0 || damage <= 0) {
+        contadorPuntos.RestarPuntos(5);
+        if (contadorPuntos.getPuntos() <= 0 || damage <= 0) {
             EndGame();
         }
 
