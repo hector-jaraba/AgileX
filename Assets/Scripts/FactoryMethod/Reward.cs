@@ -9,6 +9,10 @@ namespace Factory
 
         private int _points;
 
+        protected SpriteRenderer spriteRenderer;
+        protected Animator animator;
+        protected CircleCollider2D circleCollider2D;
+
         public int GetPoints()
         {
             return _points;
@@ -26,5 +30,16 @@ namespace Factory
                 Destroy(this.gameObject);
             }
         }
+
+        /* Creates the normal components for a reward object */
+        protected void CreateRewardComponents(){
+            spriteRenderer = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
+            animator = gameObject.AddComponent<Animator>() as Animator;
+            circleCollider2D = gameObject.AddComponent<CircleCollider2D>() as CircleCollider2D;
+        }
+
+        protected abstract void SpriteRenderConfigure();
+        protected abstract void AnimatorConfigurator();
+        protected abstract void CircleCollider2DConfigurator();
     }
 }
