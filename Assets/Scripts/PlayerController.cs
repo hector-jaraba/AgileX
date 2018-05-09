@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
     int tiempo = 50;
 
-    private ContadorPuntosImplement contadorPuntos;
+    public ContadorPuntosImplement contadorPuntos;
 
     private void Awake()
 	{
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         dmgSprite = GetComponent<SpriteRenderer>();
         attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
+        contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
 
         
     }
