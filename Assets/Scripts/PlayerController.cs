@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animations;
     private SpriteRenderer sprite;
     private SpriteRenderer dmgSprite;
-    private bool screenUI = false;
+    public bool screenUI = false;
     private bool jump;
     private bool movement = true;
     private bool flag = true;
