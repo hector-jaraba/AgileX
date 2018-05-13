@@ -188,6 +188,25 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    public void SimpleDamage(float enemyPosX)
+    {
+        jump = true;
+        float side = Mathf.Sign(enemyPosX - transform.position.x);
+        Debug.Log(side);
+        playerRigidBody.AddForce(Vector2.left * (side * 0.05f), ForceMode2D.Impulse);
+
+        //movement = false;
+        Invoke("EnableMovement", 0.7f);
+        dmgSprite.color = Color.red;
+        damage -= 10;
+        contadorPuntos.RestarPuntos(5);
+        if (contadorPuntos.getPuntos() <= 0 || damage <= 0)
+        {
+            EndGame();
+        }
+
+    }
+
 
     void Attack()
     {

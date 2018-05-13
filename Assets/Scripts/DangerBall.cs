@@ -52,4 +52,11 @@ public class DangerBall : MonoBehaviour
         // }
 
     }
+
+    private void OnDrawGizmos()
+    {
+        
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x,finishPosition,0));
+    }
 }
