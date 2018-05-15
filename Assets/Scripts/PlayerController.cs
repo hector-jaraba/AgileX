@@ -181,7 +181,11 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        damage += 10;
+        if (damage < 100) {
+            damage += 10;
+        }
+        
+
         contadorPuntos.RestarPuntos(5);
         if (contadorPuntos.getPuntos() <= 0 || damage == 100) {
             EndGame();
@@ -199,7 +203,11 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        damage += 10;
+        if (damage < 100) {
+            damage += 10;
+        }
+        
+
         contadorPuntos.RestarPuntos(5);
         if (contadorPuntos.getPuntos() <= 0 || damage == 100)
         {
