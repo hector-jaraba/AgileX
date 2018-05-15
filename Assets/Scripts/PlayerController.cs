@@ -13,14 +13,13 @@ public class PlayerController : MonoBehaviour {
     
     public Image health;
     public Image life;
-    public float energy = 100;
-    public float damage = 100;
     public int puntosGanar = 50;
 
     public GameObject gameOverScreen;
     public GameObject winScreen;
-    public GameObject healthBar;
-    public GameObject lifeBar;
+    public BarManager BarManager;
+    private GameObject energyBar;
+    private GameObject lifeBar;
 
     private CircleCollider2D attackCollider;
     private Rigidbody2D playerRigidBody;
@@ -37,7 +36,7 @@ public class PlayerController : MonoBehaviour {
     float timeMax = 0.05f;
     float increment = 0.0f;
 
-    int tiempo = 50;
+
 
     public ContadorPuntosImplement contadorPuntos;
 
@@ -45,10 +44,13 @@ public class PlayerController : MonoBehaviour {
 	{
         gameOverScreen = GameObject.Find("GameOver");
         winScreen = GameObject.Find("WinScreen");
-        healthBar = GameObject.Find("EnergyBar");
+        energyBar = GameObject.Find("EnergyBar");
         lifeBar = GameObject.Find("LifeBar");
+        BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
-        damage -= 100;
+        BarManager.doDamage(-100);
+
+
     }
 
 	// Use this for initialization
@@ -62,42 +64,6 @@ public class PlayerController : MonoBehaviour {
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
 
         
-    }
-
-    public void ActualizarHealthLifeBar() {
-
-        timer += Time.deltaTime;
-        increment = 0.2f;
-
-        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow)) && energy >= 0){
-            energy -= increment;
-            flag = false;
-        } else{
-            if(energy < 100 && flag){
-                    energy += 0.3f;                
-                flag = false;
-            }
-        }            
-
-        health.transform.localScale = new Vector2(energy / 100f, 1);
-        life.transform.localScale = new Vector2(damage / 100f, 1);
-
-        // flag para controlar que solo crezca la energia cada 5 segundos
-        if (timer >= timeMax){
-            flag = true;
-            timer = 0.0f;
-            
-        } 
-
-
-        // Si se queda sin energia o aparece alguna pantalla UI no se puede mover 
-        if (energy <= 0)
-        {
-            movement = false;
-        }
-        else if (energy > 5 && !screenUI){
-            movement = true;
-        } 
     }
 	
 	// Update is called once per frame
@@ -120,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        ActualizarHealthLifeBar();
+        //BarManager.ActualizarHealthLifeBar();
         if (contadorPuntos.getPuntos() >= puntosGanar){
             Win();
         } 
@@ -181,13 +147,13 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        if (damage < 100) {
-            damage += 10;
+        if (BarManager.getDamage() < 100) {
+            BarManager.doDamage(10); 
         }
         
 
         contadorPuntos.RestarPuntos(5);
-        if (contadorPuntos.getPuntos() <= 0 || damage == 100) {
+        if (contadorPuntos.getPuntos() <= 0 || BarManager.getDamage() == 100) {
             EndGame();
         }
 
@@ -203,13 +169,13 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        if (damage < 100) {
-            damage += 10;
+        if (BarManager.getDamage() < 100) {
+            BarManager.doDamage(10);
         }
         
 
         contadorPuntos.RestarPuntos(5);
-        if (contadorPuntos.getPuntos() <= 0 || damage == 100)
+        if (contadorPuntos.getPuntos() <= 0 || BarManager.getDamage() == 100)
         {
             EndGame();
         }
@@ -255,7 +221,7 @@ public class PlayerController : MonoBehaviour {
 
     void EnableMovement()
     {
-        //movement = true;
+        movement = true;
         dmgSprite.color = Color.white;
     }
 
@@ -268,7 +234,7 @@ public class PlayerController : MonoBehaviour {
         movement = false;
         screenUI = true;
         winScreen.SetActive(true);
-        healthBar.SetActive(false);
+        energyBar.SetActive(false);
 
 
     }
@@ -280,6 +246,6 @@ public class PlayerController : MonoBehaviour {
         screenUI = true;
         Debug.Log("movimiento" + movement);
         gameOverScreen.SetActive(true);
-        healthBar.SetActive(false);
+        energyBar.SetActive(false);
     }
 }

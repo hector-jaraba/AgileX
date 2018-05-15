@@ -215,13 +215,11 @@ MonoBehaviour:
   knockPower: 0.52
   health: {fileID: 0}
   life: {fileID: 0}
-  energy: 100
-  damage: 100
   puntosGanar: 125
   gameOverScreen: {fileID: 0}
   winScreen: {fileID: 0}
-  healthBar: {fileID: 0}
-  lifeBar: {fileID: 0}
+  BarManager: {fileID: 0}
+  screenUI: 0
   contadorPuntos: {fileID: 0}
 --- !u!114 &114530874285816326
 MonoBehaviour:

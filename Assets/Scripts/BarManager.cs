@@ -6,7 +6,7 @@ public class BarManager : MonoBehaviour {
 
 
     public GameObject energiaVerde;
-    public GameObject energiaRoja;
+    public GameObject energiaNegra;
 
     public GameObject vida;
     public GameObject daño;
@@ -33,7 +33,7 @@ public class BarManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         energiaVerde = GameObject.Find("EnergiaVerde");
-        energiaRoja = GameObject.Find("EnergiaRoja");
+        energiaNegra = GameObject.Find("EnergiaNegra");
 
         vida = GameObject.Find("Vida");
         daño = GameObject.Find("Daño");
@@ -44,7 +44,7 @@ public class BarManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
+        ActualizarHealthLifeBar();
 	}
 
     public void ActualizarHealthLifeBar()
@@ -84,7 +84,6 @@ public class BarManager : MonoBehaviour {
         {
             player.SendMessage("DisableMovement");
         }
-        //else if (energy > 5 && !screenUI)
         else if (energy > 5 && !playerScript.screenUI)
         {
             player.SendMessage("EnableMovement");
@@ -95,7 +94,7 @@ public class BarManager : MonoBehaviour {
 
     public void maxDamage()
     {
-        damage = 100;
+        damage = 0;
     }
 
     public void maxEnergy()
@@ -121,5 +120,10 @@ public class BarManager : MonoBehaviour {
     public float getEnergy()
     {
         return energy;
+    }
+
+    public void setDamage(int value)
+    {
+        damage = value;
     }
 }

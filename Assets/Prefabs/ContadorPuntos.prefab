@@ -73,8 +73,9 @@ GameObject:
   - component: {fileID: 223024684531996240}
   - component: {fileID: 114207510543971422}
   - component: {fileID: 114978812092115964}
+  - component: {fileID: 114026841221533332}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: BarManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,6 +208,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5a02d17e473c544a57488ca7a648c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114026841221533332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1426407708086984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda98fe5186e0d74fa8298ebb2dc9853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energiaVerde: {fileID: 0}
+  energiaNegra: {fileID: 0}
+  vida: {fileID: 0}
+  "da\xF1o": {fileID: 0}
+  player: {fileID: 0}
+  energy: 100
+  damage: 100
 --- !u!114 &114053108013685562
 MonoBehaviour:
   m_ObjectHideFlags: 1

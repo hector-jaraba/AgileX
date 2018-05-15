@@ -21,6 +21,7 @@ public class Botiquin : MonoBehaviour {
     private Quaternion startRotation;
 
     private PlayerController player;
+    private BarManager barManager;
 
     // Use this for initialization
     void Start()
@@ -30,7 +31,9 @@ public class Botiquin : MonoBehaviour {
         startPosition = transform.position;
         startRotation = transform.rotation;
         startScale = transform.localScale;
+
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        barManager = GameObject.Find("BarManager").GetComponent<BarManager>();
 
         InvokeRepeating("Respawn", primeraAparicion, respawnDelay);
 
@@ -65,12 +68,12 @@ public class Botiquin : MonoBehaviour {
     void EnergyRestore()
     {
         int maxHealth = 0;
-        if (player.damage <= puntosVida)
+        if (barManager.getDamage() <= puntosVida)
         {
-            player.damage = maxHealth;
+            barManager.setDamage(maxHealth);
         }
         else {
-            player.damage -= puntosVida;
+            barManager.doDamage(-puntosVida);
         }
     }
 
