@@ -45,9 +45,10 @@ public class PlayerController : MonoBehaviour {
 	{
         gameOverScreen = GameObject.Find("GameOver");
         winScreen = GameObject.Find("WinScreen");
-        healthBar = GameObject.Find("HealthBar");
+        healthBar = GameObject.Find("EnergyBar");
         lifeBar = GameObject.Find("LifeBar");
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+        damage -= 100;
     }
 
 	// Use this for initialization
@@ -180,9 +181,9 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        damage -= 10;
+        damage += 10;
         contadorPuntos.RestarPuntos(5);
-        if (contadorPuntos.getPuntos() <= 0 || damage <= 0) {
+        if (contadorPuntos.getPuntos() <= 0 || damage == 100) {
             EndGame();
         }
 
@@ -198,9 +199,9 @@ public class PlayerController : MonoBehaviour {
         //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        damage -= 10;
+        damage += 10;
         contadorPuntos.RestarPuntos(5);
-        if (contadorPuntos.getPuntos() <= 0 || damage <= 0)
+        if (contadorPuntos.getPuntos() <= 0 || damage == 100)
         {
             EndGame();
         }

@@ -64,13 +64,13 @@ public class Botiquin : MonoBehaviour {
 
     void EnergyRestore()
     {
-        int maxHealth = 100;
-        if (player.energy <= (maxHealth-puntosVida))
+        int maxHealth = 0;
+        if (player.damage <= puntosVida)
         {
-            player.energy += puntosVida;
+            player.damage = maxHealth;
         }
         else {
-            player.energy = maxHealth;
+            player.damage -= puntosVida;
         }
     }
 

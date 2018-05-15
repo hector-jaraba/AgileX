@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class coin : MonoBehaviour {
-    public int points = 0;
+    public int puntos = 5;
 
+    private ContadorPuntosImplement contadorPuntos;
 
-
-
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
-
-
+        contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
     }
 
     // Update is called once per frame
@@ -25,6 +22,7 @@ public class coin : MonoBehaviour {
     {
         if (collision.tag == "Player"){
             Destroy(this.gameObject);
+            contadorPuntos.SumarPuntos(puntos);
         }
     }
 
