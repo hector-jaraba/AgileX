@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
+    public bool screenUI = false; //used BarManager
+    private bool jump;
+    private bool movement = true;
+    private bool disableMovement;
+    public bool grounded;
+
+    public int puntosGanar = 50;
+
     public float speed = 75f;
     public float maxSpeed = 3f;
-    public bool grounded;
     public float jumpPower = 9.35f;
-    public float knockPower = 6.5f;    
-    
-    public Image health;
-    public Image life;
-    public int puntosGanar = 50;
+    public float knockPower = 6.5f;
 
     public GameObject gameOverScreen;
     public GameObject winScreen;
@@ -26,19 +29,7 @@ public class PlayerController : MonoBehaviour {
     private Animator animations;
     private SpriteRenderer sprite;
     private SpriteRenderer dmgSprite;
-    public bool screenUI = false;
-    private bool jump;
-    private bool movement = true;
-    private bool flag = true;
-    private bool disableMovement;
-
-    float timer = 0.0f;
-    float timeMax = 0.05f;
-    float increment = 0.0f;
-
-
-
-    public ContadorPuntosImplement contadorPuntos;
+    private ContadorPuntosImplement contadorPuntos;
 
     private void Awake()
 	{
@@ -48,12 +39,8 @@ public class PlayerController : MonoBehaviour {
         lifeBar = GameObject.Find("LifeBar");
         BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
-        BarManager.doDamage(-100);
-
-
     }
 
-	// Use this for initialization
 	void Start () {
         //buscamos los componentes internos
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -62,75 +49,52 @@ public class PlayerController : MonoBehaviour {
         dmgSprite = GetComponent<SpriteRenderer>();
         attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
-
-        
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-
-        animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
-        animations.SetBool("Grounded", grounded);
-
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded) {
-            jump = true;
-        }
-
-        if (!movement) disableMovement = true;
-
-
-
-        Attack();
     }
 
     void FixedUpdate()
     {
-        //BarManager.ActualizarHealthLifeBar();
-        if (contadorPuntos.getPuntos() >= puntosGanar){
-            Win();
-        } 
+        if (contadorPuntos.getPuntos() >= puntosGanar){Win();} 
 
-        // el jugador no se puede mover
         if (movement) {
-
             // detecto la direccion en el eje horizontal
             float h = Input.GetAxis("Horizontal");
 
             //le aplico una fuerza
             playerRigidBody.AddForce(Vector2.right * speed * h);
 
-
             //con la funcion clamp de la libreria mathf puedo poner un limite a la velocidad
             float limitedSpeed = Mathf.Clamp(playerRigidBody.velocity.x, -maxSpeed, maxSpeed);
             playerRigidBody.velocity = new Vector2(limitedSpeed, playerRigidBody.velocity.y);
 
-            if (h > 0.1f)
-            {
-                sprite.flipX = false;
-                
-            }
+            if (h > 0.1f){sprite.flipX = false;}
 
-            if (h < -0.1f)
-            {
-                sprite.flipX = true;
-                
-            }
+            if (h < -0.1f){sprite.flipX = true;}
 
-            if (jump)
-            {
+            if (jump){
                 playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 jump = false;
-
             }
-
-
         }
+
+        animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
+        animations.SetBool("Grounded", grounded);
+    }
+
+    private void Update()
+    {
+
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded)
+        {
+            jump = true;
+        }
+
+        if (!movement) disableMovement = true;
+
+        Attack();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.tag == "GameOver") {
             EndGame();
             screenUI = true;
@@ -144,13 +108,9 @@ public class PlayerController : MonoBehaviour {
         float side = Mathf.Sign(enemyPosX - transform.position.x);
         playerRigidBody.AddForce(Vector2.left * knockPower * side , ForceMode2D.Impulse);
 
-        //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
-        if (BarManager.getDamage() < 100) {
-            BarManager.doDamage(10); 
-        }
-        
+        if (BarManager.getDamage() < 100) {BarManager.doDamage(10);}   
 
         contadorPuntos.RestarPuntos(5);
         if (contadorPuntos.getPuntos() <= 0 || BarManager.getDamage() == 100) {
@@ -166,13 +126,11 @@ public class PlayerController : MonoBehaviour {
         Debug.Log(side);
         playerRigidBody.AddForce(Vector2.left * (side * 0.05f), ForceMode2D.Impulse);
 
-        //movement = false;
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
         if (BarManager.getDamage() < 100) {
             BarManager.doDamage(10);
-        }
-        
+        }       
 
         contadorPuntos.RestarPuntos(5);
         if (contadorPuntos.getPuntos() <= 0 || BarManager.getDamage() == 100)
@@ -181,7 +139,6 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-
 
     void Attack()
     {
@@ -235,11 +192,8 @@ public class PlayerController : MonoBehaviour {
         screenUI = true;
         winScreen.SetActive(true);
         energyBar.SetActive(false);
-
-
     }
 
-    // acaba el juego
     private void EndGame()
     {
         movement = false;

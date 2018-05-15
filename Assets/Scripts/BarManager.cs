@@ -40,6 +40,8 @@ public class BarManager : MonoBehaviour {
 
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerController>();
+
+        damage -= 100;
 	}
 	
 	// Update is called once per frame
