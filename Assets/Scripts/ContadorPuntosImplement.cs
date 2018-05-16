@@ -6,23 +6,27 @@ using UnityEngine.UI;
 public class ContadorPuntosImplement : MonoBehaviour {
 
     private Text puntuacion;
-    private int puntosTotal = 20;
 
-    void Start () {
+    void Start ()
+    {
         puntuacion = GetComponent<Text>();
-        puntuacion.text = "Puntos: " + puntosTotal;
+        puntuacion.text = "Puntos: " + Singleton.Instance.puntosTotal;
     }
 
-    public int getPuntos(){return this.puntosTotal;}
+    public int getPuntos()
+    {
+        return Singleton.Instance.puntosTotal;
+    }
 
-    public void SumarPuntos(int puntos) {
-        puntosTotal += puntos;
-        puntuacion.text = "Puntos: " + puntosTotal;
+    public void SumarPuntos(int puntos)
+    {
+        Singleton.Instance.puntosTotal += puntos;
+        puntuacion.text = "Puntos: " + Singleton.Instance.puntosTotal;
     }
 
     public void RestarPuntos(int puntos)
     {
-        puntosTotal -= puntos;
-        puntuacion.text = "Puntos: " + puntosTotal;
+        Singleton.Instance.puntosTotal -= puntos;
+        puntuacion.text = "Puntos: " + Singleton.Instance.puntosTotal;
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Gem : MonoBehaviour {
 
-    public int points = 0;
-
     public float primeraAparicion = 0.2f;
     public int respawnDelay = 10;
     public float GemPositionY = 10.0f;
