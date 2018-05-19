@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject gameOverScreen;
     public GameObject winScreen;
+    public GameObject pauseScreen;
     public BarManager BarManager;
     private GameObject energyBar;
     private GameObject lifeBar;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 	{
         gameOverScreen = GameObject.Find("GameOver");
         winScreen = GameObject.Find("WinScreen");
+        pauseScreen = GameObject.Find("PauseScreen");
         energyBar = GameObject.Find("EnergyBar");
         lifeBar = GameObject.Find("LifeBar");
         BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
@@ -89,6 +91,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (!movement) disableMovement = true;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) { Pause(); }
 
         Attack();
     }
@@ -176,7 +180,7 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void EnableMovement()
+    public void EnableMovement()
     {
         movement = true;
         dmgSprite.color = Color.white;
@@ -201,5 +205,16 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("movimiento" + movement);
         gameOverScreen.SetActive(true);
         energyBar.SetActive(false);
+    }
+
+    private void Pause()
+    {
+        movement = false;
+        screenUI = true;
+        Debug.Log("Pause Menu");
+        pauseScreen.GetComponent<PauseUI>().GameIsPaused = true;
+        pauseScreen.SetActive(true);
+
+        Time.timeScale = 0;
     }
 }
