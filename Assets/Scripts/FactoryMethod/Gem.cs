@@ -5,32 +5,58 @@ using UnityEngine;
 namespace Factory{
     public class Gem : Reward
     {
+        private BoxCollider2D boxCollider2D;
+
         protected override void AnimatorConfigurator()
         {
-            throw new System.NotImplementedException();
+            string animation = "Animations/gem_0";
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(animation);
         }
 
-        protected override void CircleCollider2DConfigurator()
+        private void BoxCollider2DConfigurator()
         {
-            throw new System.NotImplementedException();
+            
+            boxCollider2D.isTrigger = true;
+
+
         }
 
         protected override void SpriteRenderConfigure()
         {
-            throw new System.NotImplementedException();
+            string sprite = "Sprites/gem";
+            spriteRenderer.sprite = Resources.Load(sprite, typeof(Sprite)) as Sprite;
+            spriteRenderer.sortingLayerName = "DECORADO";
+
         }
 
-        // Use this for initialization
-        void Start()
+        protected override void CreateRewardComponents()
         {
-
+            base.CreateRewardComponents();
+            if (boxCollider2D == null)
+            {
+                boxCollider2D = gameObject.AddComponent<BoxCollider2D>() as BoxCollider2D;
+                BoxCollider2DConfigurator();
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+
+
+        protected override void Awake()
         {
-
+            base.Awake();
+            gameObject.tag = "Gem";
         }
+
+        protected override void OnTriggerEnter2D(Collider2D collision)
+        {
+            base.OnTriggerEnter2D(collision);
+
+            if (collision.tag == "Gem") {
+                base.touchReward = true;
+                Debug.Log(base.IsTouchingReward());
+            }
+        }
+
     }
 }
 

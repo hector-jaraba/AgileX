@@ -7,20 +7,42 @@ namespace Factory
     public abstract class Reward : MonoBehaviour
     {
 
-        private int _points;
+        public int puntos;
 
         protected SpriteRenderer spriteRenderer;
         protected Animator animator;
-        protected CircleCollider2D circleCollider2D;
+        protected ContadorPuntosImplement contadorPuntos;
+        protected bool touchReward;
+       
 
-        public int GetPoints()
+       
+
+        protected abstract void SpriteRenderConfigure();
+        protected abstract void AnimatorConfigurator();
+
+        protected virtual void Awake()
         {
-            return _points;
+            contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+            CreateRewardComponents();
+            touchReward = false; 
+            
         }
 
-        public void SetPoints(int points)
+        /* Creates the normal components for a reward object */
+        protected virtual void CreateRewardComponents()
         {
-            this._points = points;
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
+                SpriteRenderConfigure();
+            }
+
+            if (animator == null)
+            {
+                animator = gameObject.AddComponent<Animator>() as Animator;
+                AnimatorConfigurator();
+            }
+
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -28,18 +50,14 @@ namespace Factory
             if (collision.tag == "Player")
             {
                 Destroy(gameObject);
+                if(contadorPuntos != null) contadorPuntos.SumarPuntos(puntos);
             }
         }
 
-        /* Creates the normal components for a reward object */
-        protected void CreateRewardComponents(){
-            spriteRenderer = gameObject.AddComponent<SpriteRenderer>() as SpriteRenderer;
-            animator = gameObject.AddComponent<Animator>() as Animator;
-            circleCollider2D = gameObject.AddComponent<CircleCollider2D>() as CircleCollider2D;
+        public bool IsTouchingReward() {
+            return touchReward;
         }
 
-        protected abstract void SpriteRenderConfigure();
-        protected abstract void AnimatorConfigurator();
-        protected abstract void CircleCollider2DConfigurator();
+
     }
 }
