@@ -23,11 +23,11 @@ namespace Factory
             this._points = points;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Player")
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
 

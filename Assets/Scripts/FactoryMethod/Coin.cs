@@ -12,23 +12,47 @@ namespace Factory{
 
         protected override void CircleCollider2DConfigurator()
         {
+            circleCollider2D.radius = 0.1828571f;
+
             
         }
 
         protected override void SpriteRenderConfigure()
         {
-            string sprite = "Sprites/moneda_0";
-            spriteRenderer.sprite = Resources.Load<Sprite>(sprite);
+            string sprite = "Sprites/moneda";
+            spriteRenderer.sprite = Resources.Load(sprite, typeof(Sprite)) as Sprite;
+            Debug.Log("Sprite añadido");
+
+            Debug.Log(this.spriteRenderer);
+
         }
 
 		// Use this for initialization
 		void Start () {
             
+
     		
     	}
-    	
-    	// Update is called once per frame
-    	void Update () {
+
+        protected override void OnTriggerEnter2D(Collider2D collision)
+		{
+            base.OnTriggerEnter2D(collision);
+		}
+
+
+		private void Awake()
+		{
+            CreateRewardComponents();
+            SpriteRenderConfigure();
+            CircleCollider2DConfigurator();
+            AnimatorConfigurator();
+            gameObject.tag = "Coin";
+		}
+
+		// Update is called once per frame
+		void Update () {
+
+            //Debug.Log(GetComponent<SpriteRenderer>().sprite);
     		
     	}
 
