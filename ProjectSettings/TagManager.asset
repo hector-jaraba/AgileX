@@ -11,6 +11,8 @@ TagManager:
   - botiquin
   - Attack
   - Coin
+  - smallPotion
+  - bigPotion
   layers:
   - Default
   - TransparentFX
