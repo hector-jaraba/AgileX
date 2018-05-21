@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool screenUI = false; //used BarManager
     private bool jump;
-    private bool movement = true;
+    public bool movement = true;
     private bool disableMovement;
     public bool grounded;
 
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
     public BarManager BarManager;
     private GameObject energyBar;
     private GameObject lifeBar;
+    private UIManager uiManager;
 
     private CircleCollider2D attackCollider;
     private Rigidbody2D playerRigidBody;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         lifeBar = GameObject.Find("LifeBar");
         BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
 	void Start () {
@@ -55,7 +57,9 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (contadorPuntos.getPuntos() >= puntosGanar){Win();} 
+        if (contadorPuntos.getPuntos() >= puntosGanar){
+            Win();
+        } 
 
         if (movement) {
             // detecto la direccion en el eje horizontal
@@ -192,29 +196,39 @@ public class PlayerController : MonoBehaviour {
 
     private void Win()
     {
+        /*
         movement = false;
         screenUI = true;
         winScreen.SetActive(true);
         energyBar.SetActive(false);
+        */
+        uiManager.Launch(winScreen.GetComponent<WinUI>());
     }
 
     private void EndGame()
     {
+        /*
         movement = false;
         screenUI = true;
         Debug.Log("movimiento" + movement);
         gameOverScreen.SetActive(true);
         energyBar.SetActive(false);
+        */
+
+        uiManager.Launch(winScreen.GetComponent<GameOverUI>());
     }
 
     private void Pause()
     {
+        /*
         movement = false;
         screenUI = true;
         Debug.Log("Pause Menu");
         pauseScreen.GetComponent<PauseUI>().GameIsPaused = true;
         pauseScreen.SetActive(true);
-
         Time.timeScale = 0;
+        */
+
+        uiManager.Launch(pauseScreen.GetComponent<PauseUI>());
     }
 }

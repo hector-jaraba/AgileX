@@ -46,7 +46,7 @@ public class BarManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         ActualizarHealthLifeBar();
 	}
 
@@ -54,7 +54,7 @@ public class BarManager : MonoBehaviour {
     {
 
         timer += Time.deltaTime;
-        increment = 0.2f;
+        increment = 0.05f;
 
         if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow)) && energy >= 0)
         {

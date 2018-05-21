@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseUI : MonoBehaviour {
+public class PauseUI : MonoBehaviour, IScreenManager {
 
     public bool GameIsPaused;
 
     public GameObject pauseMenuUI;
     public PlayerController playerController;
 
-    private void Start()
+    public void Start()
     {
         gameObject.SetActive(false);
-
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
+    public void Active()
+    {
+        playerController.movement = false;
+        playerController.screenUI = true;
+        GameIsPaused = true;
+        gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     void Update () {
@@ -29,6 +37,7 @@ public class PauseUI : MonoBehaviour {
             }
         }
 	}
+
     public void Resume()
     {
         gameObject.SetActive(false);
@@ -48,4 +57,11 @@ public class PauseUI : MonoBehaviour {
         Debug.Log("Aplication Quit");
         SceneManager.LoadScene(nombre);
     }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
 }
