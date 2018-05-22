@@ -13,6 +13,7 @@ TagManager:
   - Coin
   - smallPotion
   - bigPotion
+  - Object
   layers:
   - Default
   - TransparentFX

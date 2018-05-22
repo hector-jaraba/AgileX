@@ -3939,6 +3939,12 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: slashPrefab
+      value: 
+      objectReference: {fileID: 1799460006094978, guid: 8ca963b11a487ca43b0e8b21c4490433,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
   m_IsPrefabParent: 0
@@ -8143,6 +8149,10 @@ Prefab:
       propertyPath: maxSpeedEnemy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1575433452919488, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}
+      propertyPath: m_TagString
+      value: Object
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}
   m_IsPrefabParent: 0
@@ -9267,6 +9277,10 @@ Prefab:
     - target: {fileID: 1966039665038450, guid: 9d1372acb5231e44e8e7c216f52d84e8, type: 2}
       propertyPath: m_Name
       value: EnemyObserver (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966039665038450, guid: 9d1372acb5231e44e8e7c216f52d84e8, type: 2}
+      propertyPath: m_TagString
+      value: Object
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d1372acb5231e44e8e7c216f52d84e8, type: 2}
@@ -11877,6 +11891,10 @@ Prefab:
       propertyPath: m_Name
       value: BasicEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1575433452919488, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}
+      propertyPath: m_TagString
+      value: Object
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7da1fef5dcf06cd439f8ba46d6154233, type: 2}
   m_IsPrefabParent: 0
@@ -13208,6 +13226,10 @@ Prefab:
         type: 2}
       propertyPath: visionRadius
       value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966039665038450, guid: 9d1372acb5231e44e8e7c216f52d84e8, type: 2}
+      propertyPath: m_TagString
+      value: Object
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d1372acb5231e44e8e7c216f52d84e8, type: 2}

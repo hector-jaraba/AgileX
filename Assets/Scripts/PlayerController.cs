@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject energyBar;
     private GameObject lifeBar;
     private UIManager uiManager;
+    public GameObject slashPrefab;
 
     private CircleCollider2D attackCollider;
     private Rigidbody2D playerRigidBody;
@@ -99,6 +100,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) { Pause(); }
 
         Attack();
+
+        SlashAttack();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -170,6 +173,23 @@ public class PlayerController : MonoBehaviour {
 
         }
 
+    }
+
+    void SlashAttack()
+    {
+        AttackColliderUpdate();
+        AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
+        bool loading = stateInfo.IsName("Player_slash_attack");
+        if (Input.GetKeyDown(KeyCode.X))
+            animations.SetTrigger("loading");
+        else if (Input.GetKeyUp(KeyCode.X))
+        {
+            animations.SetTrigger("Attack");
+
+            GameObject slashObj = Instantiate(slashPrefab, transform.position, Quaternion.identity);
+            Slash slash = slashObj.GetComponent<Slash>();
+            slash.movimiento.x = animations.GetFloat("speed");
+        }
     }
 
     void AttackColliderUpdate() {
