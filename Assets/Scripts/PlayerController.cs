@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     private UIManager uiManager;
     public GameObject slashPrefab;
 
+
     private CircleCollider2D attackCollider;
     private Rigidbody2D playerRigidBody;
     private Animator animations;
@@ -177,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 
     void SlashAttack()
     {
-        AttackColliderUpdate();
+        //AttackColliderUpdate();
         AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
         bool loading = stateInfo.IsName("Player_slash_attack");
         if (Input.GetKeyDown(KeyCode.X))
@@ -186,9 +187,20 @@ public class PlayerController : MonoBehaviour {
         {
             animations.SetTrigger("Attack");
 
-            GameObject slashObj = Instantiate(slashPrefab, transform.position, Quaternion.identity);
+            GameObject slashObj = Instantiate(slashPrefab, attackCollider.transform.position, attackCollider.transform.rotation);
             Slash slash = slashObj.GetComponent<Slash>();
-            slash.movimiento.x = animations.GetFloat("speed");
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+            if (sprite.flipX)
+            {
+                slashRB.velocity = new Vector2( -slash.speed, slashRB.velocity.y);
+                slash.transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            else
+            {
+                slashRB.velocity = new Vector2(slash.speed, slashRB.velocity.y);
+                slash.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 

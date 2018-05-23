@@ -6,14 +6,25 @@ public class Slash : MonoBehaviour {
 
     // Use this for initialization
     public float waitBeforeDestroy;
-    public Vector2 movimiento;
+    private Rigidbody2D slashRB;
     public float speed;
+    private Transform playerTrans;
 
-	// Update is called once per frame
-	void Update () {
-        transform.position += new Vector3(transform.position.x, transform.position.y, 0) * speed * Time.deltaTime;
-		
-	}
+    void Awake()
+    {
+        slashRB = GetComponent<Rigidbody2D>();
+        playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Start()
+    {
+            
+    }
+    // Update is called once per frame
+    void Update()
+    {
+  
+    }
 
     IEnumerator OnTriggerEnter2D(Collider2D colision)
     {

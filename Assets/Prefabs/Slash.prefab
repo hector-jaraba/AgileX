@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!60 &60445521464292318
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -89,7 +89,7 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.020200253, y: 0.24333477}
       - {x: -0.036777973, y: -0.28726256}
-      - {x: -0.34375, y: -0.59375}
+      - {x: -0.08348322, y: -0.43532693}
       - {x: 0.01867199, y: -0.44617212}
       - {x: 0.13910198, y: -0.2356162}
       - {x: 0.14961052, y: 0.20220685}
@@ -106,9 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e6b8222ce54934f83625a264e3303d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitBeforeDestroy: 0
-  movimiento: {x: 0, y: 0}
-  speed: 0
+  waitBeforeDestroy: 0.1
+  speed: 6
 --- !u!212 &212119302244435050
 SpriteRenderer:
   m_ObjectHideFlags: 1
