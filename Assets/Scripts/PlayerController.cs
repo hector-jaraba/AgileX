@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public bool movement = true;
     private bool disableMovement;
     public bool grounded;
+    public bool mejoraArma = false;
 
     public int puntosGanar = 50;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject lifeBar;
     private UIManager uiManager;
     public GameObject slashPrefab;
+    
 
 
     private CircleCollider2D attackCollider;
@@ -45,6 +47,9 @@ public class PlayerController : MonoBehaviour {
         BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+
+        DontDestroyOnLoad(this.gameObject);
+        
     }
 
 	void Start () {
@@ -101,8 +106,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) { Pause(); }
 
         Attack();
-
-        SlashAttack();
+        if(mejoraArma)
+            SlashAttack();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,6 +116,9 @@ public class PlayerController : MonoBehaviour {
             EndGame();
             screenUI = true;
         }
+
+        if (collision.tag == "MejoraArma")
+            mejoraArma = true;
 
     }
 

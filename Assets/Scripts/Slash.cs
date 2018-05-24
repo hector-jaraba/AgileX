@@ -34,7 +34,7 @@ public class Slash : MonoBehaviour {
             Destroy(gameObject);
 
         }
-        else if (colision.tag != "Player" && colision.tag != "Attack")
+        else if (colision.tag == "Untagged" || colision.tag == "Ground")
             Destroy(gameObject);
     }
 }
