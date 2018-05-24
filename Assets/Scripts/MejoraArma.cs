@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MejoraArma : MonoBehaviour {
 
-
-    
+    public GameObject estadoJuego;
     // Use this for initialization
     void Start () {
-   
+        estadoJuego = GameObject.Find("EstadoJuego");
     }
 	
 	// Update is called once per frame
@@ -20,8 +19,10 @@ public class MejoraArma : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
+            estadoJuego.GetComponent<Estado>().mejoraArma = 1;
             Destroy(gameObject);
         }
  
     }
+
 }
