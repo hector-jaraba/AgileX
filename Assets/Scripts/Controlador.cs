@@ -17,4 +17,11 @@ public class Controlador : MonoBehaviour {
         Application.Quit();
     }
 
+    public void Volver(string nombre)
+    {
+        //Debug.Log("Aplication Quit");
+        print("Volviendo a " + nombre);
+        SceneManager.LoadScene(nombre);
+    }
+
 }

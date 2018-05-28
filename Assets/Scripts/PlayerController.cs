@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject slashPrefab;
     public GameObject estadoJuego;
     
+    
 
 
     private CircleCollider2D attackCollider;
@@ -258,8 +259,8 @@ public class PlayerController : MonoBehaviour {
         gameOverScreen.SetActive(true);
         energyBar.SetActive(false);
         */
-
-        uiManager.Launch(winScreen.GetComponent<GameOverUI>());
+        //estadoJuego.GetComponent<Estado>().GuardarRanking();
+        uiManager.Launch(gameOverScreen.GetComponent<GameOverUI>());
     }
 
     private void Pause()

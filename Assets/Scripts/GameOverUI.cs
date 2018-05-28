@@ -31,6 +31,11 @@ public class GameOverUI : MonoBehaviour, IScreenManager {
         SceneManager.LoadScene(nombre);
     }
 
+    public void VerRanking(string ranking)
+    {
+        SceneManager.LoadScene(ranking);
+    }
+
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
