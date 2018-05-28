@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Controlador : MonoBehaviour {
+public class Controlador : MonoBehaviour, IScreenManager
+{
 
     public void CambiarEscena(string nombre)
     {
@@ -22,6 +23,24 @@ public class Controlador : MonoBehaviour {
         //Debug.Log("Aplication Quit");
         print("Volviendo a " + nombre);
         SceneManager.LoadScene(nombre);
+    }
+
+    public void Active()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Quit(string nombre)
+    {
+        //Debug.Log("Aplication Quit");
+        print("Volviendo a " + nombre);
+        SceneManager.LoadScene(nombre);
+    }
+
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
