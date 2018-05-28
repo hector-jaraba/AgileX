@@ -7,11 +7,13 @@ public class EnemyObserver : MonoBehaviour {
     public float visionRadius = 2.5f;
     public float explosionRadius = 1.25f;
     public float speed = 2.5f;
+    public AudioClip audioExplosion;
     GameObject player;
     Animator anim;
     Rigidbody2D rigidBody2D;
     SpriteRenderer spriteRenderer;
     AnimatorStateInfo stateInfo;
+    AudioSource audio;
     bool explote = false;
     bool die = false;
     bool run = false;
@@ -26,6 +28,8 @@ public class EnemyObserver : MonoBehaviour {
         anim = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
+
 	}
 	
 	// Update is called once per frame
@@ -69,6 +73,7 @@ public class EnemyObserver : MonoBehaviour {
 
         if (isExploding)
         {
+            
             float playbackTime = stateInfo.normalizedTime;
             if ((playbackTime > 0.33 && playbackTime<0.99) && (dist < explosionRadius))
             {
@@ -89,6 +94,7 @@ public class EnemyObserver : MonoBehaviour {
         
         if (collision.tag == "Player") {
             explote = true;
+            audio.PlayOneShot(audioExplosion);
         }
     }
 

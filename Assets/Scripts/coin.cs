@@ -6,10 +6,12 @@ public class coin : MonoBehaviour {
     public int puntos = 5;
 
     private ContadorPuntosImplement contadorPuntos;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,11 +23,13 @@ public class coin : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player"){
-            Destroy(this.gameObject);
             contadorPuntos.SumarPuntos(puntos);
+            audioSource.Play();
+            Destroy(this.gameObject.GetComponent<Collider2D>());
+            Destroy(this.gameObject.GetComponent<SpriteRenderer>());
+            Destroy(this.gameObject,1);
         }
     }
-
 
 
 }

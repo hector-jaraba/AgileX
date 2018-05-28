@@ -2158,12 +2158,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &262556745 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114760502499157476, guid: ab9f6751e7451c94a808b8e702f1c7a1,
-    type: 2}
-  m_PrefabInternal: {fileID: 54571849}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &269710358
 GameObject:
   m_ObjectHideFlags: 0
@@ -5191,16 +5185,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
         type: 2}
-      propertyPath: health
-      value: 
-      objectReference: {fileID: 262556745}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: life
-      value: 
-      objectReference: {fileID: 1331884989}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 1892577570}
@@ -5209,12 +5193,6 @@ Prefab:
       propertyPath: winScreen
       value: 
       objectReference: {fileID: 472321480}
-    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
-        type: 2}
-      propertyPath: slashPrefab
-      value: 
-      objectReference: {fileID: 1799460006094978, guid: 8ca963b11a487ca43b0e8b21c4490433,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
   m_IsPrefabParent: 0
@@ -9284,6 +9262,7 @@ GameObject:
   - component: {fileID: 1136783317}
   - component: {fileID: 1136783316}
   - component: {fileID: 1136783320}
+  - component: {fileID: 1136783321}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9371,6 +9350,86 @@ MonoBehaviour:
   minCamPosition: {x: 0, y: 0}
   maxCamPosition: {x: 25.8, y: 0}
   smoothTime: 0.15
+--- !u!82 &1136783321
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1136783315}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c579b8e40aa237d499f88de75a100b6d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1139030894
 GameObject:
   m_ObjectHideFlags: 0
@@ -11780,12 +11839,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &1331884989 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114053108013685562, guid: ab9f6751e7451c94a808b8e702f1c7a1,
-    type: 2}
-  m_PrefabInternal: {fileID: 54571849}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1340832518
 GameObject:
   m_ObjectHideFlags: 0

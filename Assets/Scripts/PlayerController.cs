@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour {
     private UIManager uiManager;
     public GameObject slashPrefab;
     public GameObject estadoJuego;
+
+    public AudioClip audioSaltar;
+    public AudioClip audioAtaque;
+    public AudioClip audioDanyo;
+    private AudioSource audio;
     
     
 
@@ -50,6 +55,7 @@ public class PlayerController : MonoBehaviour {
         BarManager = GameObject.Find("BarManager").GetComponent<BarManager>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        audio = GetComponent<AudioSource>();
 
         
     }
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 
             if (jump){
                 playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                audio.PlayOneShot(audioSaltar);
                 jump = false;
             }
         }
@@ -101,6 +108,7 @@ public class PlayerController : MonoBehaviour {
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded)
         {
             jump = true;
+            
         }
 
         if (!movement) disableMovement = true;
@@ -132,6 +140,7 @@ public class PlayerController : MonoBehaviour {
         jump = true;
         float side = Mathf.Sign(enemyPosX - transform.position.x);
         playerRigidBody.AddForce(Vector2.left * knockPower * side , ForceMode2D.Impulse);
+        audio.PlayOneShot(audioDanyo);
 
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
@@ -150,6 +159,7 @@ public class PlayerController : MonoBehaviour {
         float side = Mathf.Sign(enemyPosX - transform.position.x);
         Debug.Log(side);
         playerRigidBody.AddForce(Vector2.left * (side * 0.05f), ForceMode2D.Impulse);
+        audio.PlayOneShot(audioDanyo);
 
         Invoke("EnableMovement", 0.7f);
         dmgSprite.color = Color.red;
@@ -173,6 +183,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
         {
             animations.SetTrigger("Attack");
+            audio.PlayOneShot(audioAtaque);
         }
 
         if (isAttacking) {
@@ -199,7 +210,7 @@ public class PlayerController : MonoBehaviour {
         else if (Input.GetKeyUp(KeyCode.X))
         {
             animations.SetTrigger("Attack");
-
+            audio.PlayOneShot(audioAtaque);
             GameObject slashObj = Instantiate(slashPrefab, attackCollider.transform.position, attackCollider.transform.rotation);
             Slash slash = slashObj.GetComponent<Slash>();
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
