@@ -159,6 +159,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01f20e9565f7ec64db90cc63fb6edf09, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &22262189
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 21.475197
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -5.135138
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.0689077
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900084064143464, guid: 82b7069d0218079458503d4040b38994, type: 2}
+      propertyPath: m_RootOrder
+      value: 29
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 82b7069d0218079458503d4040b38994, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &25668774 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4895684133444180, guid: 34acdb59a5396044298a6c6279b13469,
