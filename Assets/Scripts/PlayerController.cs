@@ -252,39 +252,16 @@ public class PlayerController : MonoBehaviour {
 
     private void Win()
     {
-        /*
-        movement = false;
-        screenUI = true;
-        winScreen.SetActive(true);
-        energyBar.SetActive(false);
-        */
         uiManager.Launch(winScreen.GetComponent<WinUI>());
     }
 
     private void EndGame()
     {
-        /*
-        movement = false;
-        screenUI = true;
-        Debug.Log("movimiento" + movement);
-        gameOverScreen.SetActive(true);
-        energyBar.SetActive(false);
-        */
-        //estadoJuego.GetComponent<Estado>().GuardarRanking();
         uiManager.Launch(gameOverScreen.GetComponent<GameOverUI>());
     }
 
     private void Pause()
     {
-        /*
-        movement = false;
-        screenUI = true;
-        Debug.Log("Pause Menu");
-        pauseScreen.GetComponent<PauseUI>().GameIsPaused = true;
-        pauseScreen.SetActive(true);
-        Time.timeScale = 0;
-        */
-
         uiManager.Launch(pauseScreen.GetComponent<PauseUI>());
     }
 }
