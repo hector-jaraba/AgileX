@@ -28,19 +28,35 @@ public class TestInstances {
         Camera camera = GameObject.FindObjectOfType<Camera>();
 
         Assert.NotNull(camera);
-        Assert.Greater(camera.orthographicSize, 3f);
-
-        
-       
+        Assert.Greater(camera.orthographicSize, 3f);  
 
     }
 
-	// A UnityTest behaves like a coroutine in PlayMode
-	// and allows you to yield null to skip a frame in EditMode
-	[UnityTest]
-	public IEnumerator TestInstancesWithEnumeratorPasses() {
-		// Use the Assert class to test conditions.
-		// yield to skip a frame
-		yield return null;
-	}
+    [Test]
+    public void CoinTest() {
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+
+        Assert.Greater(coins.Length, 5);
+    }
+
+    [Test]
+    public void GemTest()
+    {
+        GameObject[] gems = GameObject.FindGameObjectsWithTag("Gem");
+
+        Assert.AreEqual(gems.Length, 3);
+    }
+
+    [Test]
+    public void EnemyTest() {
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Object");
+        Assert.Greater(enemys.Length, 2);
+    }
+
+    [Test]
+    public void GameOverTest() {
+        GameObject gameOver = GameObject.FindWithTag("GameOver");
+        Assert.IsNotNull(gameOver);
+        
+    }
 }

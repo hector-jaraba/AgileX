@@ -29,7 +29,7 @@ public class ContadorPuntosImplement : MonoBehaviour
 
 
     }
-    //
+   
 
 
     void Start()

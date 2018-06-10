@@ -3878,6 +3878,16 @@ Prefab:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114081319429259952, guid: 8924bacffaf9ad545bb8362ca9a52543,
+        type: 2}
+      propertyPath: BarManager
+      value: 
+      objectReference: {fileID: 763231357}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8924bacffaf9ad545bb8362ca9a52543, type: 2}
   m_IsPrefabParent: 0
@@ -5282,6 +5292,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &763231357 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114026841221533332, guid: ab9f6751e7451c94a808b8e702f1c7a1,
+    type: 2}
+  m_PrefabInternal: {fileID: 613915249}
+  m_Script: {fileID: 11500000, guid: cda98fe5186e0d74fa8298ebb2dc9853, type: 3}
 --- !u!1 &782777304
 GameObject:
   m_ObjectHideFlags: 0
