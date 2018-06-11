@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     private ContadorPuntosImplement contadorPuntos;
 
     public List<ICommand> oldCommands = new List<ICommand>();
+    private List<Superpower> superpowers = new List<Superpower>();
 
     private ICommand keyZ, KeyX, KeyUp, KeysHorizontal;
 
@@ -115,6 +116,9 @@ public class PlayerController : MonoBehaviour {
         attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
 
+        superpowers.Add(new JumpSuperpower());
+        superpowers.Add(new SpeedSuperpower());
+
         keyZ = new AttackCommand();
         KeyX = new SlashAttackCommand();
         KeyUp = new JumpCommand();
@@ -170,6 +174,16 @@ public class PlayerController : MonoBehaviour {
         if (collision.tag == "GameOver") {
             EndGame();
             screenUI = true;
+        }
+
+        if(collision.tag == "bigPotion")
+        {
+            superpowers[0].Activate(this);
+        }
+
+        if (collision.tag == "smallPotion")
+        {
+            superpowers[1].Activate(this);
         }
 
     }
