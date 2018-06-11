@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer dmgSprite;
     private ContadorPuntosImplement contadorPuntos;
 
+    public List<ICommand> oldCommands = new List<ICommand>();
+
     private ICommand keyZ, KeyX, KeyUp, KeysHorizontal;
 
     public bool Jump
@@ -156,7 +158,11 @@ public class PlayerController : MonoBehaviour {
         {
             KeyX.Execute(this);
         }
-            
+
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Debug.Log(oldCommands[oldCommands.Count-1]);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

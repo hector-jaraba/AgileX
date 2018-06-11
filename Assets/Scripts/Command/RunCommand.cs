@@ -9,6 +9,7 @@ public class RunCommand : ICommand {
 
     public void Execute(PlayerController player) {
         PlayerRun(player);
+        
     }
 
     public void PlayerRun(PlayerController player) {

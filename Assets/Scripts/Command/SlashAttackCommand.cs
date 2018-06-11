@@ -15,6 +15,7 @@ public class SlashAttackCommand : ICommand {
             player.Animations.SetTrigger("loading");
         else if (Input.GetKeyUp(KeyCode.X))
         {
+            player.oldCommands.Add(this);
             player.Animations.SetTrigger("Attack");
             player.audio.PlayOneShot(player.audioAtaque);
             player.Slash();

@@ -8,6 +8,7 @@ public class AttackCommand : ICommand {
     public void Execute(PlayerController player)
     {
         PlayerAttack(player);
+        
     }
 
     void AttackColliderUpdate(PlayerController player)
@@ -31,6 +32,7 @@ public class AttackCommand : ICommand {
         bool isAttacking = stateInfo.IsName("Player_attack");
         if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
         {
+            player.oldCommands.Add(this);
             player.Animations.SetTrigger("Attack");
             player.audio.PlayOneShot(player.audioAtaque);
         }
