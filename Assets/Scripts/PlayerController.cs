@@ -28,13 +28,11 @@ public class PlayerController : MonoBehaviour {
     private UIManager uiManager;
     public GameObject slashPrefab;
     public GameObject estadoJuego;
-
+    public float h;
     public AudioClip audioSaltar;
     public AudioClip audioAtaque;
     public AudioClip audioDanyo;
-    private AudioSource audio;
-    
-    
+    public AudioSource audio;
 
 
     private CircleCollider2D attackCollider;
@@ -43,6 +41,52 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer sprite;
     private SpriteRenderer dmgSprite;
     private ContadorPuntosImplement contadorPuntos;
+
+    private ICommand keyZ, KeyX, KeyUp, KeysHorizontal;
+
+    public bool Jump
+    {
+        get
+        {
+            return jump;
+        }
+
+        set {
+            jump = value;
+        }
+    }
+
+    public Rigidbody2D PlayerRigidBody
+    {
+        get
+        {
+            return playerRigidBody;
+        }
+    }
+
+    public SpriteRenderer Sprite
+    {
+        get
+        {
+            return sprite;
+        }
+    }
+
+    public CircleCollider2D AttackCollider
+    {
+        get
+        {
+            return attackCollider;
+        }
+    }
+
+    public Animator Animations
+    {
+        get
+        {
+            return animations;
+        }
+    }
 
     private void Awake()
 	{
@@ -68,6 +112,11 @@ public class PlayerController : MonoBehaviour {
         dmgSprite = GetComponent<SpriteRenderer>();
         attackCollider = transform.GetChild(0).GetComponent<CircleCollider2D>();
         contadorPuntos = GameObject.Find("ContadorPuntosText").GetComponent<ContadorPuntosImplement>();
+
+        keyZ = new AttackCommand();
+        KeyX = new SlashAttackCommand();
+        KeyUp = new JumpCommand();
+        KeysHorizontal = new RunCommand();
     }
 
     void FixedUpdate()
@@ -77,29 +126,16 @@ public class PlayerController : MonoBehaviour {
         } 
 
         if (movement) {
-            // detecto la direccion en el eje horizontal
-            float h = Input.GetAxis("Horizontal");
+            h = Input.GetAxis("Horizontal");
+            KeysHorizontal.Execute(this);
 
-            //le aplico una fuerza
-            playerRigidBody.AddForce(Vector2.right * speed * h);
-
-            //con la funcion clamp de la libreria mathf puedo poner un limite a la velocidad
-            float limitedSpeed = Mathf.Clamp(playerRigidBody.velocity.x, -maxSpeed, maxSpeed);
-            playerRigidBody.velocity = new Vector2(limitedSpeed, playerRigidBody.velocity.y);
-
-            if (h > 0.1f){sprite.flipX = false;}
-
-            if (h < -0.1f){sprite.flipX = true;}
-
-            if (jump){
-                playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                audio.PlayOneShot(audioSaltar);
-                jump = false;
+            if (Jump){
+                KeyUp.Execute(this);
             }
         }
 
-        animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
-        animations.SetBool("Grounded", grounded);
+        Animations.SetFloat("Speed", Mathf.Abs(playerRigidBody.velocity.x));
+        Animations.SetBool("Grounded", grounded);
     }
 
     private void Update()
@@ -107,18 +143,18 @@ public class PlayerController : MonoBehaviour {
 
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && grounded)
         {
-            jump = true;
-            
+            jump = true; 
         }
 
         if (!movement) disableMovement = true;
 
         if (Input.GetKeyDown(KeyCode.Escape)) { Pause(); }
 
-        Attack();
+        keyZ.Execute(this);
+
         if(estadoJuego.GetComponent<Estado>().mejoraArma == 1)
         {
-            SlashAttack();
+            KeyX.Execute(this);
         }
             
     }
@@ -129,9 +165,6 @@ public class PlayerController : MonoBehaviour {
             EndGame();
             screenUI = true;
         }
-
-        //if (collision.tag == "MejoraArma")
-        //    mejoraArma = 1;
 
     }
 
@@ -157,7 +190,6 @@ public class PlayerController : MonoBehaviour {
     {
         jump = true;
         float side = Mathf.Sign(enemyPosX - transform.position.x);
-        Debug.Log(side);
         playerRigidBody.AddForce(Vector2.left * (side * 0.05f), ForceMode2D.Impulse);
         audio.PlayOneShot(audioDanyo);
 
@@ -175,71 +207,25 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void Attack()
-    {
-        AttackColliderUpdate();
-        AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
-        bool isAttacking = stateInfo.IsName("Player_attack");
-        if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
+
+    public void Slash() {
+        GameObject slashObj = Instantiate(slashPrefab, AttackCollider.transform.position, AttackCollider.transform.rotation);
+        Slash slash = slashObj.GetComponent<Slash>();
+        Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+        if (Sprite.flipX)
         {
-            animations.SetTrigger("Attack");
-            audio.PlayOneShot(audioAtaque);
+            slashRB.velocity = new Vector2(-slash.speed, slashRB.velocity.y);
+            slash.transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if (isAttacking) {
-            float playbackTime = stateInfo.normalizedTime;
-            if (playbackTime > 0.33 && playbackTime < 0.66)
-            {
-                attackCollider.enabled = true;
-            }
-            else {
-                attackCollider.enabled = false;
-            }
-
-        }
-
-    }
-
-    void SlashAttack()
-    {
-        //AttackColliderUpdate();
-        AnimatorStateInfo stateInfo = animations.GetCurrentAnimatorStateInfo(0);
-        bool loading = stateInfo.IsName("Player_slash_attack");
-        if (Input.GetKeyDown(KeyCode.X))
-            animations.SetTrigger("loading");
-        else if (Input.GetKeyUp(KeyCode.X))
+        else
         {
-            animations.SetTrigger("Attack");
-            audio.PlayOneShot(audioAtaque);
-            GameObject slashObj = Instantiate(slashPrefab, attackCollider.transform.position, attackCollider.transform.rotation);
-            Slash slash = slashObj.GetComponent<Slash>();
-            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-            if (sprite.flipX)
-            {
-                slashRB.velocity = new Vector2( -slash.speed, slashRB.velocity.y);
-                slash.transform.localScale = new Vector3(-1, 1, 1);
-            }
-
-            else
-            {
-                slashRB.velocity = new Vector2(slash.speed, slashRB.velocity.y);
-                slash.transform.localScale = new Vector3(1, 1, 1);
-            }
+            slashRB.velocity = new Vector2(slash.speed, slashRB.velocity.y);
+            slash.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
-    void AttackColliderUpdate() {
-
-        if (sprite.flipX)
-        {
-            attackCollider.offset = new Vector2(-0.6f, 0);
-        }
-        else {
-            attackCollider.offset = new Vector2(0.6f, 0);
-        }
-
-    }
-
+    
     public void EnableMovement()
     {
         movement = true;
