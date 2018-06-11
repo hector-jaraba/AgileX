@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     private ContadorPuntosImplement contadorPuntos;
 
     public List<ICommand> oldCommands = new List<ICommand>();
+
     private List<Superpower> superpowers = new List<Superpower>();
 
     private ICommand keyZ, KeyX, KeyUp, KeysHorizontal;
